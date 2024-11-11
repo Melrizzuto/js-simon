@@ -68,6 +68,7 @@ const confirmButton = document.getElementById("confirm-button");
 
 // Aggiungo un evento al bottone di conferma
 confirmButton.addEventListener("click", function() {
+    event.preventDefault();
     // Chiamo la funzione per verificare le risposte
     checkAnswers();
 });
