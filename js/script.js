@@ -53,7 +53,7 @@ let timer = setInterval(function() {
 
         // Mostro il form di risposta
         const answersForm = document.getElementById("answers-form");
-        answersForm.classList.remove('d-none');
-        numbersList.classList.add("d-none")  // Rende visibile il form
+        answersForm.classList.remove('d-none'); // Rende visibile il form
+        numbersList.classList.add("d-none")  // Rimuove i numeri
     }
 }, 1000);
