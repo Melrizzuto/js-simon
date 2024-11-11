@@ -36,3 +36,21 @@ for (let i = 0; i < randomNumbers.length; i++) {
     li.innerHTML = randomNumbers[i];  // Imposto il testo del <li> con il numero casuale
     numbersList.appendChild(li);  // Aggiungo il <li> alla lista visualizzata nella pagina
 }
+
+// Devo far apparire un countdown
+let countdown = 5;
+
+let countdownDisplay = document.getElementById("countdown");
+
+let timer = setInterval(function() {
+    countdown--;  // Decremento il countdown
+    countdownDisplay.innerHTML = `Tempo rimanente: ${countdown}s`;  // Mostra il tempo rimanente
+
+    // Se il countdown arriva a 0, fermo il timer
+    if (countdown === 0) {
+        clearInterval(timer);  // Ferma il timer
+        countdownDisplay.innerHTML = "Tempo scaduto!";  // Opzionale: Messaggio quando il tempo scade
+    }
+}, 1000); 
+
+if
