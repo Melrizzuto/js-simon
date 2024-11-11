@@ -11,8 +11,8 @@ console.clear();
 
 // SVOLGIMENTO:
 
-// 1. Funzione per generare numeri casuali:
 
+//1.  Funzione per generare numeri casuali
 function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -32,14 +32,13 @@ console.log(numbersList);
 
 // Ciclo attraverso l'array di numeri casuali e creo un <li> per ciascuno
 for (let i = 0; i < randomNumbers.length; i++) {
-    const li = document.createElement('li');  // Creo un elemento <li>
+    const li = document.createElement("li");  // Creo un elemento <li>
     li.innerHTML = randomNumbers[i];  // Imposto il testo del <li> con il numero casuale
     numbersList.appendChild(li);  // Aggiungo il <li> alla lista visualizzata nella pagina
 }
 
 
-// 2./3. Creo il countdown:
-
+// 2. e 3. Creo il Countdown e caselle di input
 let countdown = 5;
 let countdownDisplay = document.getElementById("countdown");
 
@@ -60,25 +59,40 @@ let timer = setInterval(function () {
 }, 1000);
 
 
+
 // 4. Check dei numeri inseriti dall'utente:
+
 
 // Seleziono il bottone di conferma
 const confirmButton = document.getElementById("confirm-button");
 
 // Aggiungo un evento al bottone di conferma
-confirmButton.addEventListener("click", function(event) {
-    // Impedisco il comportamento predefinito del bottone (se fosse dentro un form)
-    event.preventDefault();
-
+confirmButton.addEventListener("click", function() {
     // Chiamo la funzione per verificare le risposte
-    checkAnswers(event);
+    checkAnswers();
 });
 
 // Funzione per controllare le risposte
-function checkAnswers(event) {
-    const inputs = document.querySelectorAll('input');
+function checkAnswers() {
+    const inputs = document.querySelectorAll("input");
     let wrongNumbers = [];
     let correctCount = 0;
 
-    
+    // Verifico se i numeri inseriti sono presenti nei numeri generati
+    for (let i = 0; i < inputs.length; i++) {
+        const userInput = parseInt(inputs[i].value);
+        if (randomNumbers.includes(userInput)) {
+            correctCount++;
+        } else {
+            wrongNumbers.push(userInput);
+        }
+    }
+
+    // Mostro il risultato
+    const resultMessage = document.getElementById("message");
+    if (wrongNumbers.length === 0) {
+        resultMessage.innerHTML = `Hai vinto! Hai indovinato tutti i numeri: ${randomNumbers.join(", ")}!`;
+    } else {
+        resultMessage.innerHTML = `Hai sbagliato ${wrongNumbers.length} numeri: ${wrongNumbers.join(", ")}. I numeri corretti erano: ${randomNumbers.join(", ")}.`;
+    }
 }
