@@ -1,3 +1,6 @@
+"use strict"
+console.clear();
+
 /* Consegna
 
 1. Visualizzare in pagina 5 numeri casuali. 
@@ -10,3 +13,11 @@ nell'ordine che preferisce.
 
 4. Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri da indovinare sono stati individuati.
 */
+
+
+// devo far generare numeri causuali al pc
+
+const getNumber = document.getElementById("numbers-list");
+console.log(getNumber)
+
+
