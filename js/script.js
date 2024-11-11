@@ -46,11 +46,14 @@ let timer = setInterval(function() {
     countdown--;  // Decremento il countdown
     countdownDisplay.innerHTML = `Tempo rimanente: ${countdown}s`;  // Mostra il tempo rimanente
 
-    // Se il countdown arriva a 0, fermo il timer
-    if (countdown === 0) {
+      // Se il countdown arriva a 0, fermo il timer e mostro il form
+      if (countdown === 0) {
         clearInterval(timer);  // Ferma il timer
-        countdownDisplay.innerHTML = "Tempo scaduto!";  // Opzionale: Messaggio quando il tempo scade
-    }
-}, 1000); 
+        countdownDisplay.innerHTML = "Tempo scaduto!";  // Messaggio quando il tempo scade
 
-if
+        // Mostro il form di risposta
+        const answersForm = document.getElementById("answers-form");
+        answersForm.classList.remove('d-none');
+        numbersList.classList.add("d-none")  // Rende visibile il form
+    }
+}, 1000);
