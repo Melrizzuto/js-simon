@@ -15,9 +15,24 @@ nell'ordine che preferisce.
 */
 
 
-// devo far generare numeri causuali al pc
+// Genero numeri casuali usando la funzione getRandomNumber e li accumulo in un array:
 
-const getNumber = document.getElementById("numbers-list");
-console.log(getNumber)
+// Creo un array vuoto per raccogliere i numeri:
+const randomNumbers = []; 
 
+// Ciclo for per generare e aggiungere 5 numeri casuali:
+for (let i = 0; i < 5; i++) {
+    randomNumbers.push(getRandomNumber(1, 50)); 
+}
+console.log(randomNumbers);
 
+// Seleziono l'elemento della lista nel DOM dove mostrerò i numeri:
+const numbersList = document.getElementById("numbers-list");
+console.log(numbersList);
+
+// Ciclo attraverso l'array di numeri casuali e creo un <li> per ciascuno:
+for (let i = 0; i < randomNumbers.length; i++) {
+    const li = document.createElement('li');  // Creo un elemento <li>
+    li.innerHTML = randomNumbers[i];  // Imposto il testo del <li> con il numero casuale
+    numbersList.appendChild(li);  // Aggiungo il <li> alla lista visualizzata nella pagina
+}
