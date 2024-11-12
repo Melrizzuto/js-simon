@@ -13,41 +13,45 @@ console.clear();
 
 
 //1.  Funzione per generare numeri casuali
-function getRandomNumber(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+
 
 // Creo un array vuoto per raccogliere i numeri casuali
 const randomNumbers = [];
-
-// Ciclo per generare 5 numeri casuali
-for (let i = 0; i < 5; i++) {
-    randomNumbers.push(getRandomNumber(1, 50));
-}
-console.log(randomNumbers);
 
 // Seleziono l'elemento della lista nel DOM dove mostrerò i numeri
 const numbersList = document.getElementById("numbers-list");
 console.log(numbersList);
 
-// Ciclo attraverso l'array di numeri casuali e creo un <li> per ciascuno
-for (let i = 0; i < randomNumbers.length; i++) {
-    const li = document.createElement("li");  // Creo un elemento <li>
-    li.innerHTML = randomNumbers[i];  // Imposto il testo del <li> con il numero casuale
-    numbersList.appendChild(li);  // Aggiungo il <li> alla lista visualizzata nella pagina
+let i = 0;
+
+// Ciclo while per generare 5 numeri casuali unici e aggiungerli alla lista nel DOM
+while (i < 5) {
+    const randomNumber = getRandomNumber(1, 50);
+
+    // Controllo se il numero è già nell'array
+    if (!randomNumbers.includes(randomNumber)) {
+        randomNumbers.push(randomNumber);  // Aggiungo il numero casuale all'array
+
+        const li = document.createElement("li");  // Creo un elemento <li>
+        li.innerHTML = randomNumber;  // Imposto il testo del <li> con il numero casuale
+        numbersList.appendChild(li);  // Aggiungo il <li> alla lista visualizzata nella pagina
+
+        i++;  // Incremento il contatore solo se il numero è unico
+    }
 }
 
+console.log(randomNumbers);
 
 // 2. e 3. Creo il Countdown e caselle di input
-let countdown = 5;
+let seconds = 5;
 let countdownDisplay = document.getElementById("countdown");
 
 let timer = setInterval(function () {
-    countdown--;  // Decremento il countdown
-    countdownDisplay.innerHTML = `Tempo rimanente: ${countdown}s`;  // Mostra il tempo rimanente
+    seconds--;  // Decremento il countdown
+    countdownDisplay.innerHTML = `Tempo rimanente: ${seconds}s`;  // Mostra il tempo rimanente
 
     // Se il countdown arriva a 0, fermo il timer e mostro il form
-    if (countdown === 0) {
+    if (seconds === 0) {
         clearInterval(timer);  // Ferma il timer
         countdownDisplay.innerHTML = "Tempo scaduto!";  // Messaggio quando il tempo scade
 
@@ -55,6 +59,7 @@ let timer = setInterval(function () {
         const answersForm = document.getElementById("answers-form");
         answersForm.classList.remove('d-none'); // Rende visibile il form
         numbersList.classList.add("d-none")  // Rimuove i numeri
+        document.getElementById("instructions").innerHTML = "Inserisci i numeri che hai visto.";
     }
 }, 1000);
 
@@ -67,7 +72,7 @@ let timer = setInterval(function () {
 const confirmButton = document.getElementById("confirm-button");
 
 // Aggiungo un evento al bottone di conferma
-confirmButton.addEventListener("click", function() {
+confirmButton.addEventListener("click", function (event) {
     event.preventDefault();
     // Chiamo la funzione per verificare le risposte
     checkAnswers();
